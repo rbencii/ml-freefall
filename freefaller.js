@@ -11,7 +11,7 @@ class FreeFaller {
         this.controls=new Controls();
     }
 
-    animate(){
+    animate(dt){
         if(this.controls.left)
             this.x-=2;
 
@@ -19,9 +19,9 @@ class FreeFaller {
             this.x+=2;
 
         if(this.controls.headDown)
-            this.speed+=this.acceleration;
+            this.speed+=this.acceleration*dt;
         else if(this.speed>2)
-            this.speed=Math.max(this.speed-this.acceleration,this.minSpeed);
+            this.speed=Math.max(this.speed-this.acceleration*dt,this.minSpeed);
         
 
         if(this.speed>this.maxSpeed)

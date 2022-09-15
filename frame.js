@@ -5,9 +5,20 @@ const gameContext = gameCanvas.getContext('2d');
 
 const testFaller = new FreeFaller(250,100);
 
+
+
+
+
+const perfectFrameTime = 1000 / 60;
+let deltaTime = 0;
+let lastFrame = 0;
+
 function animate(){
-    
-    testFaller.animate();
+    let currentFrame = performance.now();
+    deltaTime = (currentFrame - lastFrame) / perfectFrameTime;
+    lastFrame = now;
+
+    testFaller.animate(deltaTime);
     gameCanvas.height=window.innerHeight;
     testFaller.draw(gameContext)
     requestAnimationFrame(animate);
