@@ -13,14 +13,14 @@ const perfectFrameTime = 1000 / 60;
 let deltaTime = 0;
 let lastFrame = 0;
 
-let testCloud = new Cloud(Math.floor(Math.random()*(gameCanvas.width-200)+100),gameCanvas.height);
+let testCloud = new Cloud(250,700);
 
 function animate(){
     let currentFrame = performance.now();
     deltaTime = (currentFrame - lastFrame) / perfectFrameTime;
     lastFrame = currentFrame;
-    if(testCloud.isDead)
-        testCloud = new Cloud(Math.floor(Math.random()*(gameCanvas.width-200)+100),gameCanvas.height);
+    //if(testCloud.isDead)
+    //    testCloud = new Cloud(Math.floor(Math.random()*(gameCanvas.width-200)+100),gameCanvas.height);
     testCloud.animate(deltaTime);
     testFaller.animate(deltaTime);
     gameCanvas.height=window.innerHeight;
