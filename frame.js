@@ -22,8 +22,7 @@ function animate(){
     let currentFrame = performance.now();
     deltaTime = (currentFrame - lastFrame) / perfectFrameTime;
     lastFrame = currentFrame;
-    console.log(testClouds.filter(x=>x.isDead()).length);
-    testClouds.filter(x=>x.isDead()).map(x=>x = new Cloud(Math.floor(Math.random()*(gameCanvas.width-200)+100),900));
+    testClouds.forEach((x,i)=>{if(x.isDead())testClouds[i]=new Cloud(Math.floor(Math.random()*(gameCanvas.width-200)+100),900)})
     testClouds.forEach(x=>x.animate(deltaTime));
     testFaller.animate(deltaTime);
     gameCanvas.height=window.innerHeight;
