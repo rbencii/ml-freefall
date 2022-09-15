@@ -14,7 +14,7 @@ let deltaTime = 0;
 let lastFrame = 0;
 
 let testClouds = [];
-for(let i=0;i<15;i++){
+for(let i=0;i<8;i++){
     testClouds[i] = new Cloud(Math.floor(Math.random()*(gameCanvas.width+1)),500+i*350);
 }
 
