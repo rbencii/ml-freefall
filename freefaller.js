@@ -13,23 +13,23 @@ class FreeFaller {
 
     animate(dt){
         if(this.controls.left)
-            this.x-=2;
+            this.x-=this.minSpeed*dt;
 
         if(this.controls.right)
-            this.x+=2;
+            this.x+=this.minSpeed*dt;
 
         if(this.controls.headDown)
-            this.speed+=this.acceleration*dt;
+            this.speed+=this.acceleration*(dt/4.0);
         else if(this.speed>2)
-            this.speed=Math.max(this.speed-this.acceleration*dt,this.minSpeed);
+            this.speed=Math.max(this.speed-this.acceleration*(dt/4.0),this.minSpeed);
         
 
         if(this.speed>this.maxSpeed)
             this.speed=this.maxSpeed;
 
-        this.y+=this.speed
+        this.y+=this.speed*dt
         if(this.y>100)
-            this.y-=this.acceleration;
+            this.y-=this.acceleration*dt;
     }
     
     draw(ctx){
