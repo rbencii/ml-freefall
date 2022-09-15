@@ -8,7 +8,7 @@ class FreeFaller {
         this.fallSpeed=2;
         this.maxFallSpeed=8;
         this.sideSpeed=0;
-        this.maxSideSpeed=5;
+        this.maxSideSpeed=3;
         this.minSpeed=2;
         this.controls=new Controls();
     }
