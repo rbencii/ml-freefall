@@ -2,7 +2,7 @@ class Cloud {
     constructor(x,y){
         this.x=x;
         this.y=y;
-        this.w=Math.floor(Math.random()*101+100);
+        this.w=Math.floor(Math.random()*300+60);
         this.h=50;
         this.minSpeed=2;
     }

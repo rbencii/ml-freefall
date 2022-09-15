@@ -14,8 +14,8 @@ let deltaTime = 0;
 let lastFrame = 0;
 
 let testClouds = [];
-for(let i=0;i<3;i++){
-    testClouds[i] = new Cloud(Math.floor(Math.random()*(gameCanvas.width-200)+100),Math.floor(Math.random()*500+400));
+for(let i=0;i<15;i++){
+    testClouds[i] = new Cloud(Math.floor(Math.random()*(gameCanvas.width+1)),500+i*350);
 }
 
 function animate(){
