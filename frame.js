@@ -26,8 +26,8 @@ function animate(){
     testClouds.forEach(x=>x.animate(deltaTime));
     testFaller.animate(deltaTime);
     gameCanvas.height=window.innerHeight;
-    testCloud.draw(gameContext)
-    testFaller.draw(gameContext)
+    testClouds.forEach(x=>x.draw(gameContext));
+    testFaller.draw(gameContext);
     requestAnimationFrame(animate);
 }
 animate();
