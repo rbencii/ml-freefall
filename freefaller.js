@@ -6,7 +6,7 @@ class FreeFaller {
         this.h=50;
         this.acceleration=3;
         this.speed=2;
-        this.maxSpeed=8;
+        this.maxSpeed=16;
         this.minSpeed=2;
         this.controls=new Controls();
     }
@@ -20,16 +20,19 @@ class FreeFaller {
 
         if(this.controls.headDown)
             this.speed+=this.acceleration*(dt/4.0);
-        else if(this.speed>2)
-            this.speed=Math.max(this.speed-this.acceleration*(dt/4.0),this.minSpeed);
+        //else if(this.speed>2)
+        //    this.speed=Math.max(this.speed-this.acceleration*(dt/4.0),this.minSpeed);
         
 
         if(this.speed>this.maxSpeed)
             this.speed=this.maxSpeed;
 
+        if(this.y>100 && !this.controls.headDown)
+            this.speed-=this.acceleration*(dt/4.0);
+        else
+            this.speed=this.minSpeed;
         this.y+=this.speed*dt
-        if(this.y>100)
-            this.y-=this.acceleration*dt;
+        
     }
     
     draw(ctx){
