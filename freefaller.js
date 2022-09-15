@@ -33,7 +33,10 @@ class FreeFaller {
     }
     
     draw(ctx){
-        ctx.fillRect(this.x-this.w/2.0,this.y-this.h/2.0,this.w,this.h)
+        if(!this.headDown)
+            ctx.fillRect(this.x-this.w/2.0,this.y-this.h/2.0,this.w,this.h);
+        else
+            ctx.fillRect(this.x-this.h/2.0,this.y,this.h,this.w);
     }
     
 }

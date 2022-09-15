@@ -16,7 +16,7 @@ let lastFrame = 0;
 function animate(){
     let currentFrame = performance.now();
     deltaTime = (currentFrame - lastFrame) / perfectFrameTime;
-    lastFrame = now;
+    lastFrame = currentFrame;
 
     testFaller.animate(deltaTime);
     gameCanvas.height=window.innerHeight;
