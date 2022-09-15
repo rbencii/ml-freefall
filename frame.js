@@ -18,6 +18,7 @@ function animate(){
     deltaTime = (currentFrame - lastFrame) / perfectFrameTime;
     lastFrame = currentFrame;
 
+    console.log(deltaTime);
     testFaller.animate(deltaTime);
     gameCanvas.height=window.innerHeight;
     testFaller.draw(gameContext)
