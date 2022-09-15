@@ -12,3 +12,4 @@ function animate(){
     testFaller.draw(gameContext)
     requestAnimationFrame(animate);
 }
+animate();
