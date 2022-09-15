@@ -24,14 +24,15 @@ class FreeFaller {
         //    this.speed=Math.max(this.speed-this.acceleration*(dt/4.0),this.minSpeed);
         
 
-        if(this.speed>this.maxSpeed)
-            this.speed=this.maxSpeed;
+        if(Math.abs(this.speed)>Math.abs(this.maxSpeed))
+            this.speed=Math.sign(this.speed)*this.maxSpeed;
 
         if(this.y>100 && !this.controls.headDown)
             this.speed-=this.acceleration*(dt/4.0);
-        else
-            this.speed=this.minSpeed;
-        this.y+=this.speed*dt
+        else if(this.y<=100 && !this.controls.headDown)
+            this.speed=0;
+
+        this.y+=this.speed
         
     }
     
