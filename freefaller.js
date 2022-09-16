@@ -28,14 +28,14 @@ class FreeFaller {
 
         if(this.controls.left){
             this.sideSpeed-=this.acceleration*(dt/8.0);
-            if(!this.controls.headDown)
-                this.fallSpeed+=2*this.minSpeed*dt;
+            if(!this.controls.headDown && !this.controls.right)
+                this.fallSpeed+=1.33*this.minSpeed*dt;
         }
 
         if(this.controls.right){
             this.sideSpeed+=this.acceleration*(dt/8.0);
-            if(!this.controls.headDown)
-                this.fallSpeed+=2*this.minSpeed*dt;
+            if(!this.controls.headDown && !this.controls.left)
+                this.fallSpeed+=1.33*this.minSpeed*dt;
         }
 
 
