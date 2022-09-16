@@ -101,10 +101,10 @@ class FreeFaller {
         ctx.translate(this.x,this.y);
         //let y=this.controls.headDown?this.y:this.y;
         
-        if(this.controls.left && !this.controls.right)
+        if(this.controls.left && !this.controls.right && !this.controls.headDown)
             ctx.rotate(Math.PI/180 * -10);
             
-        if(this.controls.right && !this.controls.left)
+        if(this.controls.right && !this.controls.left && !this.controls.headDown)
             ctx.rotate(Math.PI/180 * 10);
 
         ctx.fillRect(-width/2.0,0,width,height)

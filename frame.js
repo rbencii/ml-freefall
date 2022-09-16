@@ -25,7 +25,7 @@ function animate(){
     testClouds.forEach((x,i)=>{if(x.isDead())testClouds[i]=new Cloud(Math.floor(Math.random()*(gameCanvas.width-61)),Math.max.apply(null,testClouds.map(x=>x.y))+175,gameCanvas)})
     testClouds.forEach(x=>x.animate(deltaTime));
     testFaller.animate(deltaTime);
-    gameCanvas.height=window.innerHeight;
+    gameCanvas.height=window.innerHeight-20;
     testClouds.forEach(x=>x.draw(gameContext));
     testFaller.draw(gameContext);
     requestAnimationFrame(animate);
