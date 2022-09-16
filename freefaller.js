@@ -2,6 +2,8 @@ class FreeFaller {
     constructor(x,y,gc){
         this.x=x;
         this.y=y;
+        this.baseW=80;
+        this.baseH=50;
         this.w=80;
         this.h=50;
         this.acceleration=3;
@@ -12,6 +14,7 @@ class FreeFaller {
         this.minSpeed=2;
         this.gc=gc;
         this.controls=new Controls();
+        this.eyes=new Eyes(this);
     }
 
     animate(dt){
@@ -21,8 +24,14 @@ class FreeFaller {
         if(this.controls.right)
             this.x+=this.minSpeed*dt;*/
 
-        let width=this.controls.headDown?this.h:this.w;
-            
+        //let width=this.controls.headDown?this.h:this.w;
+
+        if(this.controls.headDown)
+            [this.w,this.h]=[this.baseH,this.baseW]
+        else
+            [this.w,this.h]=[this.baseW,this.baseH]
+        
+        let width=this.w;          
 
         if(this.x-width/2.0>this.gc.width){
             this.x=width/2.0;
@@ -86,6 +95,7 @@ class FreeFaller {
 
         this.x+=this.sideSpeed
         this.y+=this.fallSpeed
+        this.eyes.animate();
 
         
     }
@@ -96,8 +106,10 @@ class FreeFaller {
         else
             ctx.fillRect(this.x-this.h/2.0,this.y,this.h,this.w);*/
         ctx.save()
-        let width=this.controls.headDown?this.h:this.w;
-        let height=this.controls.headDown?this.w:this.h;
+        //let width=this.controls.headDown?this.h:this.w;
+        //let height=this.controls.headDown?this.w:this.h;
+        let width=this.w;
+        let height=this.h;
         ctx.translate(this.x,this.y);
         //let y=this.controls.headDown?this.y:this.y;
         
@@ -110,6 +122,7 @@ class FreeFaller {
         ctx.fillRect(-width/2.0,0,width,height)
         ctx.translate(-this.x,-this.y);
         ctx.restore();
+        this.eyes.draw(ctx);
         
         ctx.save();
 
@@ -121,10 +134,10 @@ class FreeFaller {
 
         ctx.translate(x,this.y);
 
-        if(this.controls.left && !this.controls.right)
+        if(this.controls.left && !this.controls.right && !this.controls.headDown)
             ctx.rotate(Math.PI/180 * -10);
             
-        if(this.controls.right && !this.controls.left)
+        if(this.controls.right && !this.controls.left && !this.controls.headDown)
             ctx.rotate(Math.PI/180 * 10);
 
         if(this.x+width/2.0>this.gc.width)
