@@ -24,11 +24,22 @@ class FreeFaller {
         let width=this.controls.headDown?this.h:this.w;
             
 
-        if(this.x-width/2.0>this.gc.width)
+        if(this.x-width/2.0>this.gc.width){
             this.x=width/2.0;
+            this.y+=(this.h*0.4)*dt;
+        }
+
+
+        if(this.x+width/2.0<0){
+            this.x=this.gc.width-width/2.0;
+            this.y-=(this.h*0.4)*dt;
+        }
+
+        /*if(this.x-width/2.0>this.gc.width)
+            this.x=0+width/2.0;
 
         if(this.x+width/2.0<0)
-            this.x=this.gc.width-width/2.0;
+            this.x=this.gc.width-(0-this.x+width/2.0)+width/2.0;*/
 
         if(this.y<=100 || !this.controls.headDown)
             this.fallSpeed=0;
@@ -84,6 +95,59 @@ class FreeFaller {
             ctx.fillRect(this.x-this.w/2.0,this.y-this.h/2.0,this.w,this.h);
         else
             ctx.fillRect(this.x-this.h/2.0,this.y,this.h,this.w);*/
+        ctx.save()
+        let width=this.controls.headDown?this.h:this.w;
+        let height=this.controls.headDown?this.w:this.h;
+        ctx.translate(this.x,this.y);
+        //let y=this.controls.headDown?this.y:this.y;
+        
+        if(this.controls.left && !this.controls.right)
+            ctx.rotate(Math.PI/180 * -10);
+            
+        if(this.controls.right && !this.controls.left)
+            ctx.rotate(Math.PI/180 * 10);
+
+        ctx.fillRect(-width/2.0,0,width,height)
+        ctx.translate(-this.x,-this.y);
+        ctx.restore();
+        
+        ctx.save();
+
+        let x;
+        if(this.x+width/2.0>this.gc.width)
+            x=0;
+        else if(this.x-width/2.0<0)
+            x=this.gc.width-(0-this.x+width/2.0);
+
+        ctx.translate(x,this.y);
+
+        if(this.controls.left && !this.controls.right)
+            ctx.rotate(Math.PI/180 * -10);
+            
+        if(this.controls.right && !this.controls.left)
+            ctx.rotate(Math.PI/180 * 10);
+
+        if(this.x+width/2.0>this.gc.width)
+            ctx.fillRect(0,0,this.x+width/2.0-this.gc.width,height);
+        else if(this.x-width/2.0<0)
+            ctx.fillRect(0,0,width,height);
+        
+            ctx.translate(-x,-this.y);
+            ctx.restore();
+
+        
+        
+        /*ctx.translate(this.x,this.y);
+        ctx.rotate((Math.PI / 180) * -10);
+        //ctx.fillRect(,this.y,width,height);
+        ctx.fillRect(-width/2.0,0,width,height);
+        ctx.translate(-this.x,-this.y);
+        ctx.restore();
+        ctx.fillStyle='black';*/
+
+
+
+        /*
         let width=this.controls.headDown?this.h:this.w;
         let height=this.controls.headDown?this.w:this.h;
         //let y=this.controls.headDown?this.y:this.y;
@@ -93,8 +157,7 @@ class FreeFaller {
         else if(this.x-width/2.0<0)
             ctx.fillRect(this.gc.width-(0-this.x+width/2.0),this.y,width,height);
         ctx.fillStyle='blue';
-        ctx.fillRect(this.x-width/2.0,this.y,width,height);
-        ctx.fillStyle='black';
+        ctx.save();*/
     }
     
 }
