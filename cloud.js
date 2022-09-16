@@ -12,7 +12,7 @@ class Cloud {
     }
 
     isDead(){
-        return this.y<0;
+        return this.y+this.h/2.0<0;
     }
 
     draw(ctx){
