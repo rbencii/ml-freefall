@@ -15,14 +15,14 @@ let lastFrame = 0;
 
 let testClouds = [];
 for(let i=0;i<8;i++){
-    testClouds[i] = new Cloud(Math.floor(Math.random()*(gameCanvas.width+1)),500+i*175);
+    testClouds[i] = new Cloud(Math.floor(Math.random()*(gameCanvas.width-61)),500+i*175,gameCanvas.width);
 }
 
 function animate(){
     let currentFrame = performance.now();
     deltaTime = (currentFrame - lastFrame) / perfectFrameTime;
     lastFrame = currentFrame;
-    testClouds.forEach((x,i)=>{if(x.isDead())testClouds[i]=new Cloud(Math.floor(Math.random()*(gameCanvas.width-200)+100),Math.max.apply(null,testClouds.map(x=>x.y))+175)})
+    testClouds.forEach((x,i)=>{if(x.isDead())testClouds[i]=new Cloud(Math.floor(Math.random()*(gameCanvas.width-61)),Math.max.apply(null,testClouds.map(x=>x.y))+175,gameCanvas.width)})
     testClouds.forEach(x=>x.animate(deltaTime));
     testFaller.animate(deltaTime);
     gameCanvas.height=window.innerHeight;
