@@ -1,8 +1,8 @@
 class Cloud {
-    constructor(x,y,gcw){
+    constructor(x,y,gc){
         this.x=x;
         this.y=y;
-        this.w=Math.floor(Math.random()*(gcw-100)+50);
+        this.w=Math.floor(Math.random()*(gc.width-100)+50);
         this.h=50;
         this.minSpeed=2;
     }
