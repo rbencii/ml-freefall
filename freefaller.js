@@ -6,7 +6,7 @@ class FreeFaller {
         this.baseH=50;
         this.w=80;
         this.h=50;
-        this.acceleration=3;
+        this.acceleration=0.4;
         this.fallSpeed=2;
         this.maxFallSpeed=5;
         this.sideSpeed=0;
@@ -17,11 +17,11 @@ class FreeFaller {
         this.eyes=new Eyes(this);
     }
 
-    #collide(obj){
-        if(this.x-this.w/2.0>obj.x-this.w/2.0 &&
-           this.x-this.w/2.0<obj.x+this.w/2.0)
+    // #collide(obj){
+    //     if(this.x-this.w/2.0>obj.x-this.w/2.0 &&
+    //        this.x-this.w/2.0<obj.x+this.w/2.0)
 
-    }
+    // }
 
     animate(dt,clouds){
         /*if(this.controls.left)
@@ -41,13 +41,13 @@ class FreeFaller {
 
         if(this.x-width/2.0>this.gc.width){
             this.x=width/2.0;
-            this.y+=(this.h*0.4)*dt;
+            this.y+=(100*(this.h*0.4)/1000)*dt;
         }
 
 
         if(this.x+width/2.0<0){
             this.x=this.gc.width-width/2.0;
-            this.y-=(this.h*0.4)*dt;
+            this.y-=(100*(this.h*0.4)/1000)*dt;
         }
 
         /*if(this.x-width/2.0>this.gc.width)
@@ -60,24 +60,24 @@ class FreeFaller {
             this.fallSpeed=0;
 
         if(this.controls.left){
-            this.sideSpeed-=this.acceleration*(dt/8.0);
+            this.sideSpeed-=(this.acceleration*100/1000)*dt;
             if(!this.controls.headDown && !this.controls.right)
-                this.fallSpeed+=1.33*this.minSpeed*dt;
+                this.fallSpeed+=(133*this.minSpeed/1000.0)*dt;
         }
 
         if(this.controls.right){
-            this.sideSpeed+=this.acceleration*(dt/8.0);
+            this.sideSpeed+=(this.acceleration*100/1000)*dt;
             if(!this.controls.headDown && !this.controls.left)
-                this.fallSpeed+=1.33*this.minSpeed*dt;
+                this.fallSpeed+=(133*this.minSpeed/1000.0)*dt;
         }
 
 
         if(Math.abs(this.sideSpeed)>Math.abs(this.maxSideSpeed))
-            this.sideSpeed=Math.sign(this.sideSpeed)*this.maxSideSpeed;
+            this.sideSpeed=Math.sign(this.sideSpeed)*(this.maxSideSpeed*100/1000)*dt;
 
 
         if(this.controls.headDown)
-            this.fallSpeed+=(this.acceleration/25)*dt;
+            this.fallSpeed+=(this.acceleration*100/4000)*dt;
         //else if(this.fallSpeed>2)
         //    this.fallSpeed=Math.max(this.fallSpeed-this.acceleration*(dt/4.0),this.minSpeed);
         
@@ -85,17 +85,17 @@ class FreeFaller {
             this.fallSpeed=0;
 
         if(this.y>100 && !this.controls.headDown)
-            this.fallSpeed-=this.minSpeed*dt
+            this.fallSpeed-=(100*this.minSpeed/1000.0)*dt
 
         if(Math.abs(this.fallSpeed)>Math.abs(this.maxFallSpeed))
-            this.fallSpeed=Math.sign(this.fallSpeed)*this.maxFallSpeed;
+            this.fallSpeed=Math.sign(this.fallSpeed)*(this.maxFallSpeed*100/1000)*dt;
 
         //if(this.y>100 && !this.controls.headDown)
         //    this.fallSpeed=Math.min(this.fallSpeed-this.acceleration*(dt/24.0),this.minSpeed*dt);
 
 
         if(Math.abs(this.sideSpeed)>0.03 && !this.controls.right && !this.controls.left)
-            this.sideSpeed-=(Math.sign(this.sideSpeed)*this.acceleration/40)*dt
+            this.sideSpeed-=Math.sign(this.sideSpeed)*(this.acceleration*100/7000)*dt
         else if(!this.controls.right && !this.controls.left)
             this.sideSpeed=0;
 
