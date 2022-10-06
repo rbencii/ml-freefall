@@ -9,7 +9,6 @@ const testFaller = new FreeFaller(250,100,gameCanvas);
 
 
 
-const perfectFrameTime = 1000 / 60;
 let deltaTime = 0;
 let lastFrame = 0;
 
@@ -20,11 +19,11 @@ for(let i=0;i<8;i++){
 
 function animate(){
     let currentFrame = performance.now();
-    deltaTime = (currentFrame - lastFrame) / perfectFrameTime;
+    deltaTime = (currentFrame - lastFrame)
     lastFrame = currentFrame;
     testClouds.forEach((x,i)=>{if(x.isDead())testClouds[i]=new Cloud(Math.floor(Math.random()*(gameCanvas.width-61)),Math.max.apply(null,testClouds.map(x=>x.y))+175,gameCanvas)})
     testClouds.forEach(x=>x.animate(deltaTime));
-    testFaller.animate(deltaTime);
+    testFaller.animate(deltaTime,testClouds );
     gameCanvas.height=window.innerHeight-20;
     testClouds.forEach(x=>x.draw(gameContext));
     testFaller.draw(gameContext);

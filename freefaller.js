@@ -17,7 +17,13 @@ class FreeFaller {
         this.eyes=new Eyes(this);
     }
 
-    animate(dt){
+    #collide(obj){
+        if(this.x-this.w/2.0>obj.x-this.w/2.0 &&
+           this.x-this.w/2.0<obj.x+this.w/2.0)
+
+    }
+
+    animate(dt,clouds){
         /*if(this.controls.left)
             this.x-=this.minSpeed*dt;
 
@@ -71,7 +77,7 @@ class FreeFaller {
 
 
         if(this.controls.headDown)
-            this.fallSpeed+=this.acceleration*(dt/24.0);
+            this.fallSpeed+=(this.acceleration/25)*dt;
         //else if(this.fallSpeed>2)
         //    this.fallSpeed=Math.max(this.fallSpeed-this.acceleration*(dt/4.0),this.minSpeed);
         
@@ -89,13 +95,21 @@ class FreeFaller {
 
 
         if(Math.abs(this.sideSpeed)>0.03 && !this.controls.right && !this.controls.left)
-            this.sideSpeed-=Math.sign(this.sideSpeed)*this.acceleration*(dt/24.0)
+            this.sideSpeed-=(Math.sign(this.sideSpeed)*this.acceleration/40)*dt
         else if(!this.controls.right && !this.controls.left)
             this.sideSpeed=0;
 
+
+
+            let points=[{x:this.x-this.w/2.0, y:this.y-this.h/2.0},
+            {x:this.x+this.w/2.0, y:this.y-this.h/2.0},
+            {x:this.x-this.w/2.0, y:this.y+this.h/2.0},
+            {x:this.x+this.w/2.0, y:this.y+this.h/2.0}];
+            let touch=false;
+        clouds.forEach(x=>{if(x.y<this.y){x.hit=true}});
         this.x+=this.sideSpeed
         this.y+=this.fallSpeed
-        this.eyes.animate();
+        this.eyes.animate(clouds);
 
         
     }
@@ -123,9 +137,9 @@ class FreeFaller {
         ctx.translate(-this.x,-this.y);
         ctx.restore();
         this.eyes.draw(ctx);
-        
-        ctx.save();
 
+        ctx.save();
+        ctx.fillStyle="lightgrey";
         let x;
         if(this.x+width/2.0>this.gc.width)
             x=0;
